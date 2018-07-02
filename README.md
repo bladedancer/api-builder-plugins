@@ -6,10 +6,10 @@ These are V4 compatible API Builder plugins.
 
 A node for filtering the fields in an object.
 
-## nodehandler-gm-mustache
+## api-builder-plugin-gm-mustache
 
 A node similar to the dot/Compose node except this node  uses the Mustache template engine.
 
-## nodehandler-gm-ejs
+## api-builder-plugin-gm-ejs
 
 A node similar to the dot/Compose node except this node  uses the EJS template engine.

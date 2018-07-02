@@ -1,7 +1,7 @@
 {
-  "name": "api-builder-plugin-gm-objectfilter",
+  "name": "api-builder-plugin-gm-mustache",
   "version": "1.0.0",
-  "description": "Node to filter object fields.",
+  "description": "Node for templating using mustache",
   "author": "",
   "license": "ISC",
   "keywords": [
@@ -20,7 +20,8 @@
     "icon.svg"
   ],
   "dependencies": {
-    "axway-flow-sdk": "^2.0.0"
+    "axway-flow-sdk": "^2.0.0",
+    "mustache": "^2.3.0"
   },
   "peerDependencies": {
     "@axway/api-builder-runtime": "^4.0.0"
