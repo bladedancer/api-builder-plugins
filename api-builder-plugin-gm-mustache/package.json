@@ -1,5 +1,5 @@
 {
-  "name": "api-builder-plugin-gm-mustache",
+  "name": "@bladedancer/api-builder-plugin-gm-mustache",
   "version": "1.0.0",
   "description": "Node for templating using mustache",
   "author": "",

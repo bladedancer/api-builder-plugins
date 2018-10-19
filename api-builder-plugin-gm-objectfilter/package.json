@@ -1,5 +1,5 @@
 {
-  "name": "api-builder-plugin-gm-objectfilter",
+  "name": "@bladedancer/api-builder-plugin-gm-objectfilter",
   "version": "1.0.0",
   "description": "Node to filter object fields.",
   "author": "",

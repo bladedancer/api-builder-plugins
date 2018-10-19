@@ -1,5 +1,5 @@
 {
-  "name": "api-builder-plugin-gm-img",
+  "name": "@bladedancer/api-builder-plugin-gm-img",
   "version": "1.0.0",
   "description": "Flow node for image functions.",
   "author": "",

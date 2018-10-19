@@ -1,5 +1,5 @@
 {
-  "name": "api-builder-plugin-gm-hash",
+  "name": "@bladedancer/api-builder-plugin-gm-hash",
   "version": "1.0.0",
   "description": "Flow node for hash functions.",
   "author": "",

@@ -1,5 +1,5 @@
 {
-  "name": "api-builder-plugin-gm-foreach",
+  "name": "@bladedancer/api-builder-plugin-gm-foreach",
   "version": "1.0.0",
   "description": "For each flow node",
   "author": "",
