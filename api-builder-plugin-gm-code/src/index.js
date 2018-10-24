@@ -4,13 +4,13 @@ const action = require('./action');
 function getFlowNodes() {
 	const flownodes = sdk.init(module);
 
-	flownodes.add('code', {
+	flownodes.add('gm-code', {
 		category: 'extension',
 		name: 'Code',
 		icon: 'icon.svg',
-		description: 'Loop over items and execute specified flow.'
+		description: 'Methods for Javascript code execution.'
 	})
-		.method('exec', {
+		.method('execute', {
 			name: 'Execute',
 			description: 'Execute the code.'
 		})
@@ -34,7 +34,7 @@ function getFlowNodes() {
 			context: '$.error',
 			schema: {}
 		})
-		.action(action);
+		.action(action.execute);
 
 	return Promise.resolve(flownodes);
 }
