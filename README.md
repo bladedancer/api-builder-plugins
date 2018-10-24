@@ -2,9 +2,9 @@
 
 These are V4 compatible API Builder plugins.
 
-# @bladedancer/api-builder-plugin-gm-code
+## @bladedancer/api-builder-plugin-gm-code
 
-A POC for executing arbitrary javascript code in a flow node.
+Support for executing arbitrary javascript code inside a flow node.
 
 ## @bladedancer/api-builder-plugin-gm-ejs
 
