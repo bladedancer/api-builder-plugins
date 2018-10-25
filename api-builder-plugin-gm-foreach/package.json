@@ -34,12 +34,15 @@
     "eslint-plugin-chai-friendly": "^0.4.1",
     "eslint-plugin-mocha": "^4.11.0",
     "mocha": "^5.2.0",
+    "mock-require": "^3.0.2",
     "nyc": "^11.2.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "simple-mock": "^0.8.0"
   },
   "scripts": {
     "build": "check-node-version --package && npm run build:lint && npm run test",
     "build:lint": "eslint .",
+    "build:lint:fix": "eslint --fix .",
     "test": "rimraf coverage .nyc_output && cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary node_modules/mocha/bin/mocha ./test --recursive -R spec",
     "test:debug": "mocha --inspect --debug-brk"
   }

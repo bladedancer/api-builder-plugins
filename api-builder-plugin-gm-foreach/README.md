@@ -47,9 +47,9 @@ In the example, the flow will execute 3 times - the array had 3 elements. `$.nam
 
 The return value of the flow is the value stored in `$.response`. 
 
-## For Each
+## Flow
 
-The _For Each_ method iterates over an array of objects and invokes the specified flow with the object as the input.
+The _Flow_ method iterates over an array of objects and invokes the specified flow with the object as the input.
 
 | Param | Type | Required | Description |
 | --- | --- | --- | --- |
