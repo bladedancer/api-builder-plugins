@@ -5,7 +5,7 @@ function getFlowNodes() {
 	const flownodes = sdk.init(module);
 
 	flownodes.add('foreach', {
-		category: 'core',
+		category: 'extension',
 		name: 'For Each',
 		icon: 'icon.svg',
 		description: 'Loop over items and execute specified flow.'
