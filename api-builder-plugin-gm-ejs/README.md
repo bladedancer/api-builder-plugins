@@ -70,20 +70,12 @@ Again as the template is javascript you can iterate over the array however you l
 | _template_ | <%=names.join(' ');%> |
 | Output | Tom Dick Harry  |
 
-
-## Getting started
-
-1.  Go to [platform.axway.com](https://platform.axway.com) and create an account
-1.  Install [API Builder](https://docs.axway.com/bundle/API_Builder_allOS_en/page/api_builder.html)
-1.  Follow the [Getting Started Guide](https://docs.axway.com/bundle/API_Builder_allOS_en/page/api_builder_getting_started_guide.html)
-
 ## Install
 
-After creating your API Builder project (`appc new -t arrow`), you can install this flow-node handler
-using npm:
+After creating your API Builder project, you can install this flow-node plugin using npm:
 
 ```
-npm install --save api-builder-plugin-gm-ejs
+npm install --save @bladedancer/api-builder-plugin-gm-ejs
 ```
 
 The "EJS" flow-node will then be available in the tools panel when creating or editing Flows.
