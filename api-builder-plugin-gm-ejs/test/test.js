@@ -3,7 +3,7 @@ const action = require('../src/action');
 const expect = require('chai').expect;
 const { mocknode, validate } = require('axway-flow-sdk');
 
-describe('api-flownodes-plugin-gm-objectfilter', () => {
+describe('api-flownodes-plugin-gm-ejs', () => {
 	let plugin;
 	before(() => {
 		return nodeModule.then(resolvedSpecs => {
@@ -34,7 +34,7 @@ describe('api-flownodes-plugin-gm-objectfilter', () => {
 			expect(spec.name).to.equal('EJS');
 			expect(spec.description).to.equal('Compose strings and objects using EJS templates. See http://ejs.co/.');
 			expect(spec.icon).to.exist;
-			expect(spec.category).to.equal('core');
+			expect(spec.category).to.equal('extension');
 			expect(Object.keys(spec.methods)).to.have.members([ 'formatStr', 'formatObj' ]);
 		});
 

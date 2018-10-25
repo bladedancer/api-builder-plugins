@@ -10,7 +10,7 @@ function getFlowNodes() {
 		name: 'EJS',
 		icon: 'icon.svg',
 		description: 'Compose strings and objects using EJS templates. See http://ejs.co/.',
-		category: 'core'
+		category: 'extension'
 	});
 
 	// Format String Method
