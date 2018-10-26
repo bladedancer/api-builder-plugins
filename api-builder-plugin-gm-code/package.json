@@ -1,6 +1,6 @@
 {
   "name": "@bladedancer/api-builder-plugin-gm-code",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Code in flow",
   "author": "",
   "license": "ISC",
@@ -40,7 +40,6 @@
   "scripts": {
     "build": "check-node-version --package && npm run build:lint && npm run test",
     "build:lint": "eslint .",
-    "test": "rimraf coverage .nyc_output && cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary node_modules/mocha/bin/mocha ./test --recursive -R spec",
-    "test:debug": "mocha --inspect --debug-brk"
+    "test": "rimraf coverage .nyc_output && cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary node_modules/mocha/bin/mocha ./test --recursive -R spec"
   }
 }

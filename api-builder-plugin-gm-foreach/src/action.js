@@ -4,7 +4,7 @@ exports = module.exports = async function (req, cb) {
 	const server = APIBuilder.getGlobal();
 
 	const flowName = req.params.flow;
-	const items = req.params.items;
+	const items = req.params.items || [];
 
 	if (!server.getFlow(flowName)) {
 		return cb.flowNotFound(null, flowName);
