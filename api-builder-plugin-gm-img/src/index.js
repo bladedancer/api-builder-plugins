@@ -5,7 +5,7 @@ function getFlowNodes() {
 	const flownodes = sdk.init(module);
 
 	flownodes.add('img', {
-		category: 'core',
+		category: 'extension',
 		name: 'Image',
 		icon: 'icon.svg',
 		description: 'Image functions.'

@@ -5,7 +5,7 @@ function getFlowNodes() {
 	const flownodes = sdk.init(module);
 
 	flownodes.add('hash', {
-		category: 'core',
+		category: 'extension',
 		name: 'Hash',
 		icon: 'icon.svg',
 		description: 'Hash functions.'
