@@ -1,7 +1,7 @@
 {
-  "name": "@bladedancer/api-builder-plugin-gm-variant",
+  "name": "@bladedancer/api-builder-plugin-gm-encodeuri",
   "version": "1.0.0",
-  "description": "Plugin for creating variant Flow nodes.",
+  "description": "URI encoding in flow",
   "author": "",
   "license": "ISC",
   "keywords": [
@@ -40,7 +40,6 @@
   "scripts": {
     "build": "check-node-version --package && npm run build:lint && npm run test",
     "build:lint": "eslint .",
-    "test": "rimraf coverage .nyc_output && cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary node_modules/mocha/bin/mocha ./test --recursive -R spec",
-    "test:debug": "mocha --inspect --debug-brk"
+    "test": "rimraf coverage .nyc_output && cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary node_modules/mocha/bin/mocha ./test --recursive -R spec"
   }
 }
