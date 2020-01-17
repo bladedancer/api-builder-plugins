@@ -17,13 +17,15 @@
 	"repository": {},
 	"private": true,
 	"dependencies": {
-		"@bladedancer/api-builder-plugin-gm-db-connector": "file:../",
-		"@axway/api-builder-runtime": "^4.6.0",
 		"@axway/api-builder-plugin-fn-base64": "^1.0.0",
 		"@axway/api-builder-plugin-fn-dot": "^1.0.0",
+		"@axway/api-builder-plugin-fn-javascript": "^1.2.2",
 		"@axway/api-builder-plugin-fn-json": "^1.0.0",
+		"@axway/api-builder-plugin-fn-mustache": "^1.0.3",
 		"@axway/api-builder-plugin-fn-restclient": "^2.0.0",
-		"@axway/api-builder-plugin-fn-swagger": "^2.0.0"
+		"@axway/api-builder-plugin-fn-swagger": "^2.0.0",
+		"@axway/api-builder-runtime": "^4.6.0",
+		"@bladedancer/api-builder-plugin-gm-db-connector": "file:../"
 	},
 	"devDependencies": {
 		"@axway/api-builder-admin": "^1.6.0",

@@ -1,0 +1,38 @@
+{
+	"x-enabled": {
+		"enabled": true
+	},
+	"swagger": "2.0",
+	"info": {
+		"description": "Sample database plugin app.",
+		"version": "1.0.0",
+		"title": "Database Plugin Sample"
+	},
+	"paths": {
+		"/greet": {
+			"get": {
+				"x-flow": "DatabaseFlow",
+				"description": "List all.",
+				"operationId": "List",
+				"parameters": [],
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "details",
+						"schema": {}
+					},
+					"400": {
+						"description": "bad request",
+						"schema": {
+							"$ref": "schema:///schema/sample/error"
+						}
+					}
+				},
+				"summary": "List all the user details.",
+				"tags": []
+			}
+		}
+	}
+}

@@ -1,0 +1,255 @@
+{
+	"schemaVersion": "4",
+	"info": {
+		"name": "Database flow",
+		"description": "Example using the database plugin.",
+		"author": "",
+		"license": "ISC"
+	},
+	"parameter": {
+		"properties": {
+			"params": {
+				"type": "object",
+				"description": "The parameters from the endpoint.",
+				"properties": {},
+				"additionalProperties": false,
+				"required": []
+			},
+			"request": {
+				"type": "object",
+				"description": "The HTTP request."
+			},
+			"config": {
+				"type": "object",
+				"description": "The service's configuration"
+			},
+			"env": {
+				"type": "object",
+				"description": "The host OS environment"
+			}
+		},
+		"additionalProperties": false,
+		"required": [
+			"params",
+			"request",
+			"config",
+			"env"
+		]
+	},
+	"start": "delay.1",
+	"nodes": {
+		"response.success": {
+			"type": "nodehandler://axway-flow/http",
+			"name": "Success (HTTP 200)",
+			"method": "setresponse",
+			"parameters": [
+				{
+					"name": "status",
+					"value": "200",
+					"type": "number",
+					"metaName": "status",
+					"metaDescription": "The HTTP status code"
+				},
+				{
+					"name": "body",
+					"type": "jsonpath",
+					"value": "$.resultObj",
+					"metaName": "body",
+					"metaDescription": "The response payload"
+				}
+			],
+			"outputs": {
+				"next": {
+					"context": "$.response",
+					"metaName": "Next"
+				}
+			},
+			"metaMethod": "Set HTTP Response"
+		},
+		"response.error": {
+			"type": "nodehandler://axway-flow/http",
+			"name": "Bad Request (HTTP 400)",
+			"method": "setresponse",
+			"parameters": [
+				{
+					"name": "status",
+					"value": "400",
+					"type": "number",
+					"metaName": "status",
+					"metaDescription": "The HTTP status code"
+				}
+			],
+			"outputs": {
+				"next": {
+					"context": "$.response",
+					"metaName": "Next"
+				}
+			},
+			"metaMethod": "Set HTTP Response"
+		},
+		"person.1": {
+			"type": "nodehandler://@bladedancer/api-builder-plugin-gm-db-connector/person",
+			"name": "Persons",
+			"method": "selectAll",
+			"parameters": [],
+			"outputs": {
+				"next": {
+					"routes": [
+						"condition.1"
+					],
+					"context": "$.data.persons",
+					"metaName": "Next"
+				},
+				"error": {
+					"routes": [
+						"condition.1"
+					],
+					"context": "$.error",
+					"metaName": "Error"
+				}
+			},
+			"metaMethod": "Select All"
+		},
+		"address.3": {
+			"type": "nodehandler://@bladedancer/api-builder-plugin-gm-db-connector/address",
+			"name": "Addresses",
+			"method": "selectAll",
+			"parameters": [],
+			"outputs": {
+				"next": {
+					"routes": [
+						"condition.1"
+					],
+					"context": "$.data.addresses",
+					"metaName": "Next"
+				},
+				"error": {
+					"routes": [
+						"condition.1"
+					],
+					"context": "$.error",
+					"metaName": "Error"
+				}
+			},
+			"metaMethod": "Select All"
+		},
+		"pet.2": {
+			"type": "nodehandler://@bladedancer/api-builder-plugin-gm-db-connector/pet",
+			"name": "Pets",
+			"method": "selectAll",
+			"parameters": [],
+			"outputs": {
+				"next": {
+					"routes": [
+						"condition.1"
+					],
+					"context": "$.data.pets",
+					"metaName": "Next"
+				},
+				"error": {
+					"routes": [
+						"condition.1"
+					],
+					"context": "$.error",
+					"metaName": "Error"
+				}
+			},
+			"metaMethod": "Select All"
+		},
+		"delay.1": {
+			"type": "nodehandler://axway-flow/delay",
+			"name": "Parallel",
+			"method": "delay",
+			"parameters": [
+				{
+					"name": "delay",
+					"type": "number",
+					"value": "0",
+					"metaName": "delay",
+					"metaDescription": "The length of delay, in milliseconds."
+				}
+			],
+			"outputs": {
+				"next": {
+					"context": "$.delayed",
+					"routes": [
+						"person.1",
+						"pet.2",
+						"address.3"
+					],
+					"metaName": "Next"
+				}
+			},
+			"metaMethod": "Delay"
+		},
+		"condition.1": {
+			"type": "nodehandler://axway-flow/condition",
+			"name": "HadError",
+			"method": "exists",
+			"parameters": [
+				{
+					"name": "source",
+					"type": "jsonpath",
+					"value": "$.error",
+					"metaName": "source",
+					"metaDescription": "The input to test."
+				}
+			],
+			"outputs": {
+				"true": {
+					"routes": [
+						"response.error"
+					],
+					"context": "$.exists",
+					"metaName": "True"
+				},
+				"false": {
+					"routes": [
+						"javascript.1"
+					],
+					"context": "$.exists",
+					"metaName": "False"
+				}
+			},
+			"metaMethod": "Exists"
+		},
+		"javascript.1": {
+			"type": "nodehandler://@axway/api-builder-plugin-fn-javascript/javascript",
+			"name": "Join Results",
+			"method": "Execute",
+			"parameters": [
+				{
+					"name": "data",
+					"type": "jsonpath",
+					"value": "$.data",
+					"metaName": "data",
+					"metaDescription": "The value to apply as the `data` argument to the JavaScript code. For objects and arrays, `data` is passed by reference."
+				},
+				{
+					"name": "code",
+					"type": "string",
+					"value": "\"const results = [];\\n  const addressById = {};\\n  const personById = {};\\n \\n  data.persons.forEach(p => { personById[p.id] = p; });\\n  data.addresses.forEach(a => { addressById[a.id] = a; });\\n  \\n  Object.values(personById).forEach(p => {\\n    const result = { \\n      name: p.gn + \\\" \\\" + p.sn,\\n      pets: [],\\n      address: {}\\n    };\\n\\n    Object.entries(addressById[p.address])\\n        .filter(([k,v]) => k !== 'id' && k !== 'created_on' && k !== 'last_updated')\\n        .forEach(([k, v]) => {\\n            if (v) {\\n                result.address[k] = v;\\n            }\\n        });\\n\\n    data.pets\\n        .filter(pet => pet.ownerId === p.id)\\n        .forEach(pet => {\\n            result.pets.push(pet.name);\\n        });\\n\\n    results.push(result);\\n  });\\n  \\n  return results;\"",
+					"metaName": "code",
+					"metaDescription": "A JavaScript function body. Supports `await` and returning promises"
+				}
+			],
+			"outputs": {
+				"next": {
+					"context": "$.resultObj",
+					"routes": [
+						"response.success"
+					],
+					"metaName": "Next"
+				},
+				"error": {
+					"context": "$.error",
+					"routes": [
+						"response.error"
+					],
+					"metaName": "Error"
+				}
+			},
+			"metaMethod": "Execute"
+		}
+	}
+}
