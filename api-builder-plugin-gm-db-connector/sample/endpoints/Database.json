@@ -9,7 +9,7 @@
 		"title": "Database Plugin Sample"
 	},
 	"paths": {
-		"/greet": {
+		"/users": {
 			"get": {
 				"x-flow": "DatabaseFlow",
 				"description": "List all.",
