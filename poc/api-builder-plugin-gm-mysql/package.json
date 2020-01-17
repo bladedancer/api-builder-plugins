@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "axway-flow-sdk": "^2.0.0",
-    "knex": "^0.15.2",
+    "knex": "^0.20.8",
     "mysql2": "^1.6.4"
   },
   "peerDependencies": {
