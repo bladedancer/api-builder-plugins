@@ -53,7 +53,7 @@ async function getTableSchema(knex, table) {
     const properties = {};
     Object.entries(colInfo).forEach(([name, info]) => {
         properties[name] = {
-            schema: {} // TODO
+            schema: toSchema(info.type)
         };
         if (!info.nullable && info.defaultValue === null) {
             required.push(name);
@@ -66,6 +66,23 @@ async function getTableSchema(knex, table) {
         properties,
         required
     }
+}
+
+// Incomplete list of type mappings...should be 
+const TYPE_MAP = {
+    'character varying': 'string',
+    'varchar': 'string',
+    'timestamp': 'string',
+    'timestamp with timezone': 'string',
+    'integer': 'number',
+    'int': 'number'
+}
+
+function toSchema(dataType) {
+    const type = TYPE_MAP[dataType];
+    return type ? {
+        type
+    } : {};
 }
 
 module.exports = {

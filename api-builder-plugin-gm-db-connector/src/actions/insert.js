@@ -1,19 +1,21 @@
 const path = require('path')
 
-function insertObject(knex, sdk, table, columns, schema) {
+function insert(knex, sdk, table, columns, schema) {
     sdk
-    .method('insertObj', {
-        name: 'Insert Object',
-        description: 'Insert an object as a row.'
-    })
-    .parameter('value', 
-        {
-            description: 'The object to insert.',
-            type: 'object',
-            schema: schema
-        },
-        true /* required */
-    )
+    .method('insert', {
+        name: 'Insert',
+        description: 'Insert into table.'
+    });
+
+    columns.forEach(col => {
+        sdk.parameter(col,
+            {
+                ...schema.properties[col].schema
+            },
+            schema.required.includes(col));
+        });
+
+    sdk
     .output('next', {
         name: 'Next',
         context: '$.inserted',
@@ -29,14 +31,18 @@ function insertObject(knex, sdk, table, columns, schema) {
 }
 
 async function action(knex, table, columns, req, cb) {
+    const value = {};
+    columns.forEach(col => {
+        value[col] = req.params[col];
+    });
     try {
         const inserted = await knex(table)
             .returning(columns)
-            .insert(req.params.value);
+            .insert(value);
         cb.next(null, inserted);
     } catch (err) {
         cb.error(null, err);
     }
 }
 
-module.exports = insertObject;
+module.exports = insert;
