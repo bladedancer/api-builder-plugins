@@ -1,0 +1,39 @@
+{
+	"name": "sample",
+	"description": "An API Builder service",
+	"main": "app.js",
+	"version": "1.0.0",
+	"license": "",
+	"keywords": [
+		"api-builder",
+		"micro-service",
+		"middleware",
+		"orm",
+		"service"
+	],
+	"engines": {
+		"node": ">= 8.9"
+	},
+	"repository": {},
+	"private": true,
+	"dependencies": {
+		"@bladedancer/api-builder-plugin-gm-db-connector": "file:../",
+		"@axway/api-builder-runtime": "^4.6.0",
+		"@axway/api-builder-plugin-fn-base64": "^1.0.0",
+		"@axway/api-builder-plugin-fn-dot": "^1.0.0",
+		"@axway/api-builder-plugin-fn-json": "^1.0.0",
+		"@axway/api-builder-plugin-fn-restclient": "^2.0.0",
+		"@axway/api-builder-plugin-fn-swagger": "^2.0.0"
+	},
+	"devDependencies": {
+		"@axway/api-builder-admin": "^1.6.0",
+		"chai": "^4.1.2",
+		"mocha": "^5.2.0",
+		"nyc": "^13.3.0"
+	},
+	"scripts": {
+		"start": "node .",
+		"test": "nyc --reporter=lcov --reporter=text-summary mocha  --colors ./test --recursive -R spec",
+		"posttest": "nyc check-coverage --lines 80 --branches 80 --functions 80 --statements 80"
+	}
+}
