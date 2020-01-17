@@ -1,6 +1,7 @@
 const { SDK } = require('@axway/api-builder-sdk');
 const { getColumnNames, getTableSchema } = require('./knexUtils');
 const actions = require('./actions')
+const fs = require('fs')
 const path = require('path')
 
 class PluginTable {
@@ -19,9 +20,9 @@ class PluginTable {
 	}
 
     getIcon() {
-        let icon = path.join(__dirname, "icon.svg");
-        if (this.knex.client.driverName === "pg") {
-            icon = path.join(__dirname, "postgressql.svg");
+        let icon = path.join(__dirname, "icons", this.knex.client.driverName + ".svg");
+        if (!fs.existsSync(icon)) {
+            icon = path.join(__dirname, "icons", "default.svg");
         }
         return icon;
     }

@@ -1,32 +1,43 @@
 async function listTables(knex) {
     let query = "";
     let bindings = [];
+    let tables = [];
+    let results;
 
     switch(knex.client.constructor.name) {
         case 'Client_MSSQL':
             query = 'SELECT table_name FROM information_schema.tables WHERE table_schema = \'public\' AND table_catalog = ?',
             bindings = [ knex.client.database() ];
+            results = await knex.raw(query, bindings)
+            tables = results.rows.map((row) => row.table_name);
             break;
         case 'Client_MySQL':
         case 'Client_MySQL2':
             query = 'SELECT table_name FROM information_schema.tables WHERE table_schema = ?';
             bindings = [ knex.client.database() ];
+            results = await knex.raw(query, bindings)
+            tables = results[0].map((row) => row.table_name);
             break;
         case 'Client_Oracle':
         case 'Client_Oracledb':
             query = 'SELECT table_name FROM user_tables';
+            results = await knex.raw(query, bindings)
+            tables = results.rows.map((row) => row.table_name);
             break;
         case 'Client_PG':
             query =  'SELECT table_name FROM information_schema.tables WHERE table_schema = current_schema() AND table_catalog = ?';
             bindings = [ knex.client.database() ];
+            results = await knex.raw(query, bindings)
+            tables = results.rows.map((row) => row.table_name);
             break;
         case 'Client_SQLite3':
             query = "SELECT name AS table_name FROM sqlite_master WHERE type='table'";
+            results = await knex.raw(query, bindings)
+            tables = results.rows.map((row) => row.table_name);
             break;
     }
 
-    const results = await knex.raw(query, bindings)
-    return results.rows.map((row) => row.table_name);
+    return tables;
 }
 
 async function getColumnNames(knex, table) {
